@@ -1,0 +1,81 @@
+<div class="home">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-container">
+      <div class="hero-content">
+        <div class="hero-text">
+          <h1>
+            Connect with skilled <span class="highlight">artisans</span> in your area
+          </h1>
+          <p>
+            Post your project, receive competitive bids from verified professionals, and get quality work done at fair prices.
+          </p>
+          <div class="cta-buttons">
+            <a routerLink="/become-artisan">
+              <button class="btn-primary">Post a Job</button>
+            </a>
+            <a routerLink="/become-artisan">
+              <button class="btn-outline">Find Work</button>
+            </a>
+          </div>
+        </div>
+        <div class="hero-image-wrapper">
+          <img
+            src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1000&q=80"
+            alt="Professional artisan"
+            class="hero-image"
+          />
+          <div class="badge">
+            <span>★</span>
+            <span>Verified Professionals</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="services">
+    <div class="services-container">
+      <div class="services-header">
+        <h2>Popular Services</h2>
+        <p>Find skilled artisans for any project</p>
+      </div>
+      <div class="service-grid">
+        <div *ngFor="let service of services" class="service-card">
+          <div class="icon-wrapper" [ngClass]="service.color">
+            <i [class]="service.icon"></i>
+          </div>
+          <h3>{{ service.title }}</h3>
+          <p>{{ service.description }}</p>
+          <span class="price">{{ service.price }}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- How It Works Section -->
+<section class="how-it-works">
+  <div class="how-it-works-container">
+    <h2 class="section-title">How It Works</h2>
+    <p class="section-subtitle">Simple steps to get your project completed</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-circle step-blue">1</div>
+        <h3>Post Your Job</h3>
+        <p>Describe your project and requirements in detail</p>
+      </div>
+      <div class="step">
+        <div class="step-circle step-green">2</div>
+        <h3>Receive Bids</h3>
+        <p>Get competitive quotes from verified artisans</p>
+      </div>
+      <div class="step">
+        <div class="step-circle step-orange">3</div>
+        <h3>Choose & Complete</h3>
+        <p>Select the best artisan and get your work done</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>

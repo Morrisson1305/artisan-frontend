@@ -1,0 +1,63 @@
+<div class="register-container">
+  <div class="register-card">
+    <h2>Create an account</h2>
+    <p class="subtitle">Join CraftConnect to find work or hire skilled artisans</p>
+
+    <form [formGroup]="registerForm" (ngSubmit)="handleSubmit()">
+      <!-- Username -->
+      <div class="form-group">
+        <label for="username">Name</label>
+        <input id="name" type="text" formControlName="name" placeholder="Enter your name" required />
+      </div>
+
+      <!-- Email -->
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input id="email" type="email" formControlName="email" placeholder="Enter your email" required />
+      </div>
+
+      <!-- Phone -->
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input id="phone" type="tel" formControlName="phone" placeholder="Enter your phone number" required />
+      </div>
+
+      <!-- Password -->
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input id="password" type="password" formControlName="password" placeholder="Create a password" required />
+      </div>
+
+      <!-- Artisan Checkbox -->
+      <!-- Role Dropdown -->
+<div class="form-group">
+  <label for="role">Registering as</label>
+  <select id="role" formControlName="role" required>
+    <option value="user">User</option>
+    <option value="artisan">Artisan</option>
+  </select>
+</div>
+
+
+      <!-- Submit Button -->
+      <button type="submit" [disabled]="isSubmitting">
+        {{ isSubmitting ? 'Submitting...' : 'Register' }}
+      </button>
+    </form>
+
+    <!-- Link to Login -->
+    <div class="footer-text">
+      <span>Already have an account?</span>
+      <a routerLink="/login">Sign in</a>
+    </div>
+  </div>
+
+  <!-- OTP Modal -->
+  <!-- <app-otp-modal
+  *ngIf="showOtpModal"
+  [phone]="registrationData?.phone"
+  [type]="'registration'"
+  (verified)="onOtpSuccess()"        
+  (showToast)="onToast($event)" 
+  ></app-otp-modal> -->
+</div>

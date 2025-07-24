@@ -32,6 +32,7 @@
               }
             ],
             "styles": [
+              "node_modules/boxicons/css/boxicons.min.css",
               "src/styles.scss"
             ],
             "scripts": [],
@@ -100,8 +101,14 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy"
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "fae723d6-cb6d-4fae-b3a7-e641a95cb063"
   }
 }

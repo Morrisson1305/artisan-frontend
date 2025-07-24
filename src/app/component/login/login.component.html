@@ -1,0 +1,55 @@
+<div class="login-container">
+  <div class="login-card">
+    <h2>Sign in</h2>
+    <p class="subtitle">Enter your credentials to access your account</p>
+
+    <form [formGroup]="loginForm" (ngSubmit)="handleSubmit()">
+      <!-- Email -->
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          placeholder="Enter your email"
+          required
+        />
+        <div *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid" class="error">
+          <small *ngIf="loginForm.get('email')?.errors?.['required']">Email is required.</small>
+          <small *ngIf="loginForm.get('email')?.errors?.['email']">Invalid email format.</small>
+        </div>
+      </div>
+
+      <!-- Password -->
+      <div class="form-group">
+        <label for="password">Password</label>
+        <div class="password-wrapper">
+          <input
+            id="password"
+            [type]="showPassword ? 'text' : 'password'"
+            formControlName="password"
+            placeholder="Enter your password"
+            required
+          />
+          <button type="button" (click)="showPassword = !showPassword" class="toggle-password">
+            {{ showPassword ? 'Hide' : 'Show' }}
+          </button>
+        </div>
+        <div *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid" class="error">
+          <small>Password is required.</small>
+        </div>
+      </div>
+
+      <!-- Submit -->
+      <button type="submit" [disabled]="loginPending || loginForm.invalid">
+        {{ loginPending ? 'Signing in...' : 'Sign in' }}
+      </button>
+    </form>
+
+    <!-- Link to Register -->
+    <div class="footer-text">
+      <span>Don't have an account? </span>
+      <a routerLink="/register">Sign up</a>
+    </div>
+  </div>
+</div>

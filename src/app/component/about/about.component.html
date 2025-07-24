@@ -1,0 +1,71 @@
+<section class="about-page">
+  <div class="container">
+    <div class="header">
+      <h1>About Us</h1>
+      <span class="badge">
+        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><!-- MapPin icon --></svg>
+        Ghana Only
+      </span>
+      <p class="intro">
+        Connecting skilled artisans with customers across Ghana through a secure,
+        easy-to-use platform designed specifically for our local market.
+      </p>
+    </div>
+
+    <div class="cards-grid">
+      <div class="card border-blue">
+        <h2><svg class="icon"><!-- Users icon --></svg> Our Mission</h2>
+        <p>
+          We're dedicated to empowering local artisans and making it easier for 
+          Ghanaians to find reliable, skilled professionals for their service needs.
+          From plumbing and electrical work to painting and carpentry, we bridge 
+          the gap between skilled workers and customers.
+        </p>
+      </div>
+
+      <div class="card border-green">
+        <h2><svg class="icon"><!-- MapPin icon --></svg> Ghana-Focused</h2>
+        <p>
+          Our platform is exclusively designed for Ghana, understanding local needs,
+          pricing, and cultural preferences. We support payments in Ghana Cedis and 
+          work with artisans who understand the local market and customer expectations.
+        </p>
+      </div>
+
+      <div class="card border-purple">
+        <h2><svg class="icon"><!-- Shield icon --></svg> Security First</h2>
+        <p>
+          Every transaction is secured with OTP verification. We verify both 
+          customers and artisans through phone number authentication, ensuring 
+          a safe and trustworthy environment for all users.
+        </p>
+      </div>
+
+      <div class="card border-orange">
+        <h2><svg class="icon"><!-- Clock icon --></svg> How It Works</h2>
+        <p>
+          Post your service request, receive bids from qualified artisans,
+          review their profiles and ratings, then choose the best fit for your
+          project. All communications and payments are secured through our platform.
+        </p>
+      </div>
+    </div>
+
+    <div class="services-section">
+      <h2>Popular Services in Ghana</h2>
+      <p class="services-desc">Find skilled professionals for these common services</p>
+      <div class="services-grid">
+        <span *ngFor="let service of services" class="service-card">{{ service }}</span>
+      </div>
+    </div>
+
+    <div class="gh-card">
+      <h2>🇬🇭 Proudly Serving Ghana</h2>
+      <p>
+        This platform is exclusively available to customers and artisans within Ghana. 
+        We're committed to supporting the local economy and ensuring our services 
+        meet the specific needs of Ghanaian communities.
+      </p>
+    </div>
+  </div>
+</section>

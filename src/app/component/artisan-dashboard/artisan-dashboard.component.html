@@ -1,0 +1,135 @@
+<div class="container">
+  <!-- Header -->
+  <div class="dashboard-header">
+    <div class="welcome-text">
+      <h1>Hello, {{ user?.username }}!</h1>
+      <p>Discover new opportunities and manage your active projects</p>
+    </div>
+    <div class="action-buttons">
+      <button class="btn-outline">Edit Profile</button>
+      <button class="btn-primary">Browse Jobs</button>
+    </div>
+  </div>
+
+  <!-- Stats Cards -->
+  <div class="stats-grid">
+    <div class="card">
+      <div class="card-content">
+        <div>
+          <p class="label">Active Bids</p>
+          <p class="value text-blue">{{ activeBids }}</p>
+        </div>
+        <div class="icon-wrapper blue">
+          <app-icon name="gavel" size="24"></app-icon>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <div>
+          <p class="label">Jobs Won</p>
+          <p class="value text-green">{{ wonBids }}</p>
+        </div>
+        <div class="icon-wrapper green">
+          <app-icon name="trophy" size="24"></app-icon>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <div>
+          <p class="label">Rating</p>
+          <p class="value text-yellow">{{ rating }}</p>
+        </div>
+        <div class="icon-wrapper yellow">
+          <app-icon name="star" size="24"></app-icon>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <div>
+          <p class="label">Earnings</p>
+          <p class="value text-dark">\${{ earnings }}</p>
+        </div>
+        <div class="icon-wrapper gray">
+          <app-icon name="wallet" size="24"></app-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Available Jobs -->
+  <div class="card">
+    <div class="card-header">
+      <h2>Available Jobs</h2>
+      <select [(ngModel)]="categoryFilter">
+        <option value="all">All Categories</option>
+        <option value="painting">Painting</option>
+        <option value="plumbing">Plumbing</option>
+        <option value="electrical">Electrical</option>
+        <option value="carpentry">Carpentry</option>
+      </select>
+    </div>
+
+    <div class="card-content">
+      <div *ngIf="jobsLoading" class="text-center">
+        Loading jobs...
+      </div>
+
+      <div *ngIf="!jobsLoading && filteredJobs.length === 0" class="text-center">
+        No jobs available in this category
+      </div>
+
+      <div *ngIf="!jobsLoading && filteredJobs.length > 0">
+        <div *ngFor="let job of filteredJobs" class="job-item">
+          <div class="flex-row">
+            <div class="flex-grow">
+              <h3>{{ job.title }}</h3>
+              <p>{{ job.description }}</p>
+
+              <div class="job-meta">
+                <span>
+                  <app-icon name="map-pin" size="14"></app-icon>
+                  {{ job.location }}
+                </span>
+                <span>
+                  <app-icon name="clock" size="14"></app-icon>
+                  {{ job.timeline }}
+                </span>
+                <span *ngIf="job.budgetMin && job.budgetMax">
+                  <app-icon name="dollar-sign" size="14"></app-icon>
+                  Budget: \${{ job.budgetMin }}-\${{ job.budgetMax }}
+                </span>
+              </div>
+
+              <div class="job-tags">
+                <span class="badge-outline">{{ job.category }}</span>
+                <span class="text-xs">{{ getBidCount(job.id) }} bid(s)</span>
+              </div>
+            </div>
+
+            <div class="job-actions">
+              <button (click)="handlePlaceBid(job)" class="btn-primary">
+                Place Bid
+              </button>
+              <a [routerLink]="['/job', job.id]">
+                <button class="btn-outline btn-sm">View Details</button>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-bid-modal
+    [isOpen]="showBidModal"
+    [job]="selectedJob"
+    (close)="showBidModal = false"
+    *ngIf="selectedJob"
+  ></app-bid-modal>
+</div>

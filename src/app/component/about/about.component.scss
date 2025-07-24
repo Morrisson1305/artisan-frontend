@@ -1,0 +1,148 @@
+.about-page {
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, #eff6ff, #e0e7ff);
+
+  .container {
+    max-width: 960px;
+    margin: auto;
+    padding: 2rem 1rem;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 3rem;
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #111827;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      background: #d1fae5;
+      color: #065f46;
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.375rem;
+      font-size: 0.875rem;
+      margin-left: 0.5rem;
+
+      .icon {
+        width: 0.75rem;
+        height: 0.75rem;
+        margin-right: 0.25rem;
+      }
+    }
+
+    .intro {
+      font-size: 1.125rem;
+      color: #4b5563;
+      max-width: 600px;
+      margin: 1rem auto 0;
+    }
+  }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-bottom: 3rem;
+
+    @media (min-width: 768px) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .card {
+      padding: 1.5rem;
+      background: white;
+      border-left: 4px solid transparent;
+      border-radius: 0.5rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+
+      h2 {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 1.125rem;
+        margin-bottom: 0.5rem;
+        color: #1f2937;
+
+        .icon {
+          width: 1.25rem;
+          height: 1.25rem;
+        }
+      }
+
+      p {
+        color: #4b5563;
+      }
+
+      &.border-blue {
+        border-color: #3b82f6;
+      }
+
+      &.border-green {
+        border-color: #10b981;
+      }
+
+      &.border-purple {
+        border-color: #8b5cf6;
+      }
+
+      &.border-orange {
+        border-color: #f97316;
+      }
+    }
+  }
+
+  .services-section {
+    background: linear-gradient(to right, #3b82f6, #8b5cf6);
+    padding: 2rem;
+    border-radius: 0.75rem;
+    color: white;
+    text-align: center;
+
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .services-desc {
+      color: #dbeafe;
+      margin-bottom: 1.5rem;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 1rem;
+
+      .service-card {
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(4px);
+        padding: 0.75rem;
+        border-radius: 0.5rem;
+        font-size: 0.875rem;
+      }
+    }
+  }
+
+  .gh-card {
+    background: #fef3c7;
+    padding: 2rem;
+    border-left: 4px solid #facc15;
+    border-radius: 0.5rem;
+    text-align: center;
+    margin-top: 3rem;
+
+    h2 {
+      color: #92400e;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      color: #78350f;
+    }
+  }
+}

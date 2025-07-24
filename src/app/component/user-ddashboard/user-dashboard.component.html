@@ -1,0 +1,88 @@
+<div class="dashboard-container">
+  <!-- Header -->
+  <div class="dashboard-header">
+    <div>
+      <h1 class="text-3xl mb-2">Welcome back, {{ user?.username }}!</h1>
+      <p class="text-gray-600">Manage your service requests and track ongoing projects</p>
+    </div>
+    <button class="post-job-btn" (click)="showJobPostModal = true">
+      ➕ Post New Job
+    </button>
+  </div>
+
+  <!-- Stats Cards -->
+  <div class="stats-grid">
+    <div class="card blue">
+      <div class="card-content">
+        <div>
+          <p class="text-gray-500">Active Jobs</p>
+          <h2>{{ activeJobs.length }}</h2>
+        </div>
+        <div class="icon-circle">💼</div>
+      </div>
+    </div>
+
+    <div class="card green">
+      <div class="card-content">
+        <div>
+          <p class="text-gray-500">Completed</p>
+          <h2>{{ completedJobs.length }}</h2>
+        </div>
+        <div class="icon-circle">✅</div>
+      </div>
+    </div>
+
+    <div class="card gray">
+      <div class="card-content">
+        <div>
+          <p class="text-gray-500">Total Spent</p>
+          <h2>${{ totalSpent.toFixed(2) }}</h2>
+        </div>
+        <div class="icon-circle">💰</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Job List -->
+  <div class="card job-list-card">
+    <h3 class="text-lg mb-4">Recent Jobs</h3>
+
+    <div *ngIf="jobsLoading" class="text-gray-600">Loading jobs...</div>
+
+    <div *ngIf="!jobsLoading && jobs.length === 0" class="text-center">
+      <p class="text-gray-600">No jobs posted yet</p>
+      <button class="post-job-btn mt-4" (click)="showJobPostModal = true">
+        ➕ Post Your First Job
+      </button>
+    </div>
+
+    <div *ngIf="!jobsLoading && jobs.length > 0" class="job-list divide-y">
+      <div *ngFor="let job of jobs" class="job-item">
+        <div class="flex-1">
+          <h4 class="text-lg font-medium">{{ job.title }}</h4>
+          <p class="text-gray-600">{{ job.description }}</p>
+          <div class="job-meta text-sm text-gray-500 mt-2">
+            <span>📍 {{ job.location }}</span>
+            <span>🕒 {{ job.createdAt | date: 'mediumDate' }}</span>
+          </div>
+        </div>
+        <div class="job-actions">
+          <span
+            class="status-badge"
+            [ngClass]="{
+              'bg-blue-100 text-blue-600': job.status === 'open',
+              'bg-yellow-100 text-yellow-600': job.status === 'in_progress',
+              'bg-gray-100 text-gray-600': job.status === 'completed'
+            }"
+          >
+            {{ job.status }}
+          </span>
+          <button class="view-btn hover:underline mt-2">View Details</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Optional Modal -->
+<app-job-post-modal *ngIf="showJobPostModal" (close)="showJobPostModal = false"></app-job-post-modal>
