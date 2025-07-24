@@ -29,8 +29,8 @@ jobs:
     - name: Build Angular app
       run: npm run build -- --configuration production --base-href=/
 
-    - name: Rename index.csr.html to index.html
-      run: mv dist/craft-connect/index.csr.html dist/craft-connect/index.html
+    - name: Debug build output
+      run: ls -R dist/
 
     - name: Deploy to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@v4
