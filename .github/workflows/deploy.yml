@@ -37,5 +37,5 @@ jobs:
       with:
         branch: gh-pages
         folder: dist/craft-connect
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.GH_TOKEN }}
         cname: craftgh.com
