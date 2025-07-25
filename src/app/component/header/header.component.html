@@ -1,4 +1,4 @@
-<nav class="header">
+<!-- <nav class="header">
   <div routerLink="/" class="logo">CraftConnect</div>
   <ul class="nav-links">
     <li><a routerLink="/" routerLinkActive="active-link">Find Services</a></li>
@@ -8,4 +8,22 @@
       <a routerLink="/login" class="btn-signin">Sign In</a>
     </li>
   </ul>
+</nav> -->
+
+<nav class="header">
+  <div routerLink="/" class="logo">CraftConnect</div>
+
+  <!-- Hamburger Menu for Mobile -->
+  <button class="menu-toggle" (click)="toggleMenu()">☰</button>
+
+  <!-- Navigation Links -->
+  <ul class="nav-links" [class.open]="isMenuOpen">
+    <li><a routerLink="/" routerLinkActive="active-link" (click)="closeMenu()">Find Services</a></li>
+    <li><a routerLink="/about" routerLinkActive="active-link" (click)="closeMenu()">About Us</a></li>
+    <li><a routerLink="/become-artisan" routerLinkActive="active-link" (click)="closeMenu()">Become Artisan</a></li>
+    <li>
+      <a routerLink="/login" class="btn-signin" (click)="closeMenu()">Sign In</a>
+    </li>
+  </ul>
 </nav>
+
