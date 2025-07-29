@@ -11,6 +11,7 @@ import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { Subscription, interval } from 'rxjs';
 import { NgOtpInputModule } from 'ng-otp-input';
+import { environment } from '../../../../environment.prod';
 
 @Component({
   selector: 'app-otp-modal',
@@ -29,6 +30,7 @@ export class OtpModalComponent implements OnDestroy {
   countdown = 60;
   canResend = false;
   timerSub!: Subscription;
+  private baseUrl = environment.baseUrl;
 
   config = {
     length: 6,
@@ -69,7 +71,7 @@ export class OtpModalComponent implements OnDestroy {
       return;
     }
 
-    this.http.post('/api/auth/verify-otp', {
+    this.http.post(`${this.baseUrl}/auth/verify-otp`, {
       phone: this.phone,
       type: this.type,
       code: this.otpCode
@@ -87,7 +89,7 @@ export class OtpModalComponent implements OnDestroy {
   handleResend(): void {
     if (!this.canResend) return;
 
-    this.http.post('/api/auth/resend-otp', {
+    this.http.post(`${this.baseUrl}/auth/resend-otp`, {
       phone: this.phone,
       type: this.type
     }).subscribe(() => {

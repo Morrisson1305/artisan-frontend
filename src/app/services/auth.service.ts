@@ -7,7 +7,8 @@ import { VerifyOtpPayload } from '../shared/models/verifyotpPayload.model';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
-import { environment } from '../../../environment';
+import { environment } from '../../../environment.prod';
+
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {

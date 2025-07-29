@@ -15,6 +15,7 @@ import { ToastService } from '../../../app/services/toast.service';
   
 })
 export class LoginComponent {
+  
   loginForm: FormGroup;
   loginPending = false;
   showPassword = false;
@@ -38,9 +39,7 @@ export class LoginComponent {
     if (this.loginForm.invalid) return;
 
     this.loginPending = true;
-
     const { phone, password } = this.loginForm.value;
-
     this.authService.login({ phone, password }).subscribe({
       next: (data) => {
         this.toast.success('Welcome back! You have been successfully logged in.');
