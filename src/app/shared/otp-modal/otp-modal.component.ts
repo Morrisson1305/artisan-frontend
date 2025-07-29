@@ -77,8 +77,8 @@ export class OtpModalComponent implements OnDestroy {
       otp: this.otpCode
     }).subscribe({
       next: () => {
-        this.verified.emit();     // Signal to parent
-        this.dialogRef.close();   // Close modal
+        this.verified.emit();     
+        this.dialogRef.close();   
       },
       error: () => {
         this.showToast.emit('Invalid OTP');

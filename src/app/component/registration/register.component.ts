@@ -6,9 +6,10 @@ import { HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { OtpModalComponent } from '../../shared/otp-modal/otp-modal.component'
-import { environment } from '../../../../environment';
 import { ToastService } from '../../services/toast.service';
 import { MatDialog } from '@angular/material/dialog';
+import { environment } from '../../../../environment.prod';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -22,7 +23,7 @@ export class RegisterComponent {
   isSubmitting = false;
   private baseUrl = environment.baseUrl;
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private router: Router, private toast: ToastService, private dialog: MatDialog) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private toast: ToastService, private dialog: MatDialog) {
     this.registerForm = this.fb.group({
   name: ['', Validators.required],
   email: ['', [Validators.required, Validators.email]],
@@ -37,7 +38,7 @@ export class RegisterComponent {
     if (this.registerForm.invalid) return;
     this.isSubmitting = true;
 
-    this.http.post(`${this.baseUrl}/auth/register`, this.registerForm.value)
+      this.authService.register(this.registerForm.value)
       .pipe(
         catchError((err) => {
           this.isSubmitting = false;
