@@ -34,31 +34,68 @@ export class RegisterComponent {
 
   }
 
-  handleSubmit(): void {
+  // handleSubmit(): void {
+  //   if (this.registerForm.invalid) return;
+  //   this.isSubmitting = true;
+
+  //     this.authService.register(this.registerForm.value)
+  //     .pipe(
+  //       catchError((err) => {
+  //         this.isSubmitting = false;
+  //         this.toast.error(err?.error?.message || 'Registration failed');
+  //         return of(null);
+  //       })
+  //     )
+  //     .subscribe((res: any) => {
+  //       if (res?.user) {
+  //         this.toast.success('Registration successful. Please verify your phone number.');
+
+  //          this.dialog.open(OtpModalComponent, {
+  //           data: { phone: res.user.phone, type: 'registration' },
+  //           disableClose: true,
+  //           width: '700px',
+  //    });
+  //   }
+  //       this.isSubmitting = false;
+  //     });
+  // }
+
+    handleSubmit(): void {
     if (this.registerForm.invalid) return;
-    this.isSubmitting = true;
+      this.isSubmitting = true;
 
-      this.authService.register(this.registerForm.value)
-      .pipe(
-        catchError((err) => {
-          this.isSubmitting = false;
-          this.toast.error(err?.error?.message || 'Registration failed');
-          return of(null);
-        })
-      )
-      .subscribe((res: any) => {
-        if (res?.user) {
-          this.toast.success('Registration successful. Please verify your phone number.');
-
-           this.dialog.open(OtpModalComponent, {
-            data: { phone: res.user.phone, type: 'registration' },
-            disableClose: true,
-            width: '700px',
-     });
-    }
+    this.authService.register(this.registerForm.value)
+    .pipe(
+      catchError((err) => {
         this.isSubmitting = false;
-      });
-  }
+        this.toast.error(err?.error?.message || 'Registration failed');
+        return of(null);
+      })
+    )
+    .subscribe((res: any) => {
+      this.isSubmitting = false;
+      
+      if (res?.user) {
+        this.toast.success('Registration successful. Please verify your phone number.');
+
+        const dialogRef = this.dialog.open(OtpModalComponent, {
+          data: { phone: res.user.phone, type: 'registration' },
+          disableClose: true,
+          width: '700px',
+        });
+
+        dialogRef.componentInstance.verified.subscribe(() => {
+          this.toast.success('Your account has been verified.');
+          this.router.navigate(['/login']);
+        });
+
+        dialogRef.componentInstance.showToast.subscribe((msg: string) => {
+          this.toast.show(msg);
+        });
+      }
+    });
+}
+
 
   onOtpSuccess(): void {
     this.toast.success('Your account has been verified.');
