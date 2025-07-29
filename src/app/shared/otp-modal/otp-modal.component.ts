@@ -70,11 +70,10 @@ export class OtpModalComponent implements OnDestroy {
       this.showToast.emit('Please enter the full 6-digit OTP');
       return;
     }
-
     this.http.post(`${this.baseUrl}/auth/verify-otp`, {
       phone: this.phone,
-      type: this.type,
-      code: this.otpCode
+      //type: this.type,
+      otp: this.otpCode
     }).subscribe({
       next: () => {
         this.verified.emit();
@@ -88,10 +87,10 @@ export class OtpModalComponent implements OnDestroy {
 
   handleResend(): void {
     if (!this.canResend) return;
+    //console.log('canResend:', this.canResend);
 
     this.http.post(`${this.baseUrl}/auth/resend-otp`, {
       phone: this.phone,
-      type: this.type
     }).subscribe(() => {
       this.showToast.emit('OTP resent successfully');
       this.otpCode = '';
