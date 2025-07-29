@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { Subscription, interval } from 'rxjs';
 import { NgOtpInputModule } from 'ng-otp-input';
 import { environment } from '../../../../environment.prod';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-otp-modal',
@@ -42,7 +43,7 @@ export class OtpModalComponent implements OnDestroy {
   };
 
   constructor(
-    private http: HttpClient,
+    private authService: AuthService,
     public dialogRef: MatDialogRef<OtpModalComponent>
   ) {
     this.startTimer();
@@ -65,19 +66,19 @@ export class OtpModalComponent implements OnDestroy {
     this.otpCode = otp;
   }
 
-  handleSubmit(): void {
+    handleSubmit(): void {
     if (this.otpCode.length !== 6) {
       this.showToast.emit('Please enter the full 6-digit OTP');
       return;
     }
-    this.http.post(`${this.baseUrl}/auth/verify-otp`, {
+
+    this.authService.verifyOtp({
       phone: this.phone,
-      //type: this.type,
       otp: this.otpCode
     }).subscribe({
       next: () => {
-        this.verified.emit();
-        this.dialogRef.close();
+        this.verified.emit();     // Signal to parent
+        this.dialogRef.close();   // Close modal
       },
       error: () => {
         this.showToast.emit('Invalid OTP');
@@ -87,11 +88,7 @@ export class OtpModalComponent implements OnDestroy {
 
   handleResend(): void {
     if (!this.canResend) return;
-    //console.log('canResend:', this.canResend);
-
-    this.http.post(`${this.baseUrl}/auth/resend-otp`, {
-      phone: this.phone,
-    }).subscribe(() => {
+      this.authService.resendOtp({ phone: this.phone }).subscribe(() => {
       this.showToast.emit('OTP resent successfully');
       this.otpCode = '';
       this.startTimer();

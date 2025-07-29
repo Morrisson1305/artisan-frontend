@@ -50,18 +50,12 @@ export class AuthService {
     return this.http.post<{ message: string }>(`${this.baseUrl}/auth/register`, data);
   }
 
-  verifyOtp(data: VerifyOtpPayload): Observable<{ user: User; accessToken: string; refreshToken: string }> {
-    return this.http.post<{ user: User; accessToken: string; refreshToken: string }>(
-      `${this.baseUrl}/auth/verify-otp`,
-      data
-    ).pipe(
-      tap(response => {
-        this.authStorage.setUser(response.user);
-        this.authStorage.setTokens(response.accessToken, response.refreshToken);
-        this.user.set(response.user);
-      })
-    );
-  }
+  verifyOtp(data: VerifyOtpPayload): Observable<{ message: string }> {
+  return this.http.post<{ message: string }>(
+    `${this.baseUrl}/auth/verify-otp`,
+    data
+  );
+}
 
   resendOtp(data: { phone: string }): Observable<{ message: string }> {
     return this.http.post<{ message: string }>(`${this.baseUrl}/auth/resend-otp`, data);
