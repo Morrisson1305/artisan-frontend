@@ -2,7 +2,8 @@ import { inject } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHandlerFn, HttpInterceptorFn, HttpRequest } from '@angular/common/http';
 import { AuthStorageService } from './app/services/auth-storage.service';
 import { catchError, switchMap, throwError } from 'rxjs';
-import { environment } from '../environment';
+import { environment } from '../environment.prod';
+
 
 export const authInterceptor: HttpInterceptorFn = (req: HttpRequest<any>, next: HttpHandlerFn) => {
   const authStorage = inject(AuthStorageService);
