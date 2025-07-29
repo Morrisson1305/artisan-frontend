@@ -1,18 +1,19 @@
 import {
   Component,
-  Input,
   Output,
   EventEmitter,
   OnDestroy
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatDialogRef } from '@angular/material/dialog';
-import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { Subscription, interval } from 'rxjs';
 import { NgOtpInputModule } from 'ng-otp-input';
 import { environment } from '../../../../environment.prod';
 import { AuthService } from '../../services/auth.service';
+import { Inject } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-otp-modal',
@@ -21,8 +22,7 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './otp-modal.component.html'
 })
 export class OtpModalComponent implements OnDestroy {
-  @Input() phone!: string;
-  @Input() type!: string;
+
 
   @Output() verified = new EventEmitter<void>();
   @Output() showToast = new EventEmitter<string>();
@@ -44,7 +44,8 @@ export class OtpModalComponent implements OnDestroy {
 
   constructor(
     private authService: AuthService,
-    public dialogRef: MatDialogRef<OtpModalComponent>
+    public dialogRef: MatDialogRef<OtpModalComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: { phone: string; type: string }
   ) {
     this.startTimer();
   }
@@ -73,8 +74,8 @@ export class OtpModalComponent implements OnDestroy {
     }
 
     this.authService.verifyOtp({
-      phone: this.phone,
-      otp: this.otpCode
+      phone: this.data.phone,
+      otp: this.otpCode,
     }).subscribe({
       next: () => {
         this.verified.emit();     
@@ -88,7 +89,7 @@ export class OtpModalComponent implements OnDestroy {
 
   handleResend(): void {
     if (!this.canResend) return;
-      this.authService.resendOtp({ phone: this.phone }).subscribe(() => {
+      this.authService.resendOtp({ phone: this.data.phone }).subscribe(() => {
       this.showToast.emit('OTP resent successfully');
       this.otpCode = '';
       this.startTimer();
@@ -97,5 +98,12 @@ export class OtpModalComponent implements OnDestroy {
 
   ngOnDestroy(): void {
     this.timerSub?.unsubscribe();
+  }
+
+  get phone(): string {
+  return this.data.phone;
+}
+  get type(): string {
+    return this.data.type;
   }
 }
