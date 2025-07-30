@@ -6,11 +6,13 @@ import { AuthService } from '../../../app/services/auth.service';
 import { ToastService } from '../../../app/services/toast.service';
 import { FourDigitOtpModalComponent } from '../../shared/4digit-otp/four-digit-otp-modal/four-digit-otp-modal.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { FooterComponent } from '../footer/footer.component';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, MatDialogModule],
+  imports: [CommonModule, ReactiveFormsModule, MatDialogModule, FooterComponent, HeaderComponent],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
   

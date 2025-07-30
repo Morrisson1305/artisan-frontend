@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { OtpModalComponent } from '../../shared/otp-modal/otp-modal.component'
@@ -10,11 +9,13 @@ import { ToastService } from '../../services/toast.service';
 import { MatDialog } from '@angular/material/dialog';
 import { environment } from '../../../../environment.prod';
 import { AuthService } from '../../services/auth.service';
+import { HeaderComponent } from '../header/header.component';
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, RouterModule, ReactiveFormsModule],
+  imports: [CommonModule, RouterModule, ReactiveFormsModule, HeaderComponent, FooterComponent],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
