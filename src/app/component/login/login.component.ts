@@ -5,12 +5,12 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../../app/services/auth.service';
 import { ToastService } from '../../../app/services/toast.service';
 import { FourDigitOtpModalComponent } from '../../shared/4digit-otp/four-digit-otp-modal/four-digit-otp-modal.component';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, MatDialogModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
   
@@ -48,7 +48,8 @@ handleSubmit(): void {
 
       const dialogRef = this.dialog.open(FourDigitOtpModalComponent, {
         data: { phone, type: 'login' },
-        disableClose: true
+        disableClose: true,
+        width: '700px',
       });
 
       dialogRef.componentInstance.verified.subscribe(() => {

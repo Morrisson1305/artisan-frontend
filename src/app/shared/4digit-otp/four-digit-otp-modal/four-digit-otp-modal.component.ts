@@ -2,13 +2,16 @@ import { Component, EventEmitter, OnDestroy, Output } from '@angular/core';
 import { Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { interval, Subscription } from 'rxjs';
-import { environment } from '../../../../../environment.prod';
 import { AuthService } from '../../../services/auth.service';
-import { OtpModalComponent } from '../../otp-modal/otp-modal.component';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { NgOtpInputModule } from 'ng-otp-input';
+
 
 @Component({
   selector: 'app-four-digit-otp-modal',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule, FormsModule, NgOtpInputModule],
   templateUrl: './four-digit-otp-modal.component.html',
   styleUrl: './four-digit-otp-modal.component.scss'
 })
@@ -22,7 +25,7 @@ export class FourDigitOtpModalComponent implements OnDestroy {
   countdown = 300;
   canResend = false;
   timerSub!: Subscription;
-  private baseUrl = environment.baseUrl;
+ 
 
   config = {
     length: 4,
@@ -35,7 +38,7 @@ export class FourDigitOtpModalComponent implements OnDestroy {
 
   constructor(
     private authService: AuthService,
-    public dialogRef: MatDialogRef<OtpModalComponent>,
+    public dialogRef: MatDialogRef<FourDigitOtpModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { phone: string; type: string }
   ) {
     this.startTimer();
