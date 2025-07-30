@@ -4,19 +4,19 @@
     <p class="subtitle">Enter your credentials to access your account</p>
 
     <form [formGroup]="loginForm" (ngSubmit)="handleSubmit()">
-      <!-- Email -->
+      <!-- Phone -->
       <div class="form-group">
-        <label for="email">Email</label>
+        <label for="phone">Phone Number</label>
         <input
-          id="email"
-          type="email"
-          formControlName="email"
-          placeholder="Enter your email"
+          id="phone"
+          type="tel"
+          formControlName="phone"
+          placeholder="233241234567"
           required
         />
-        <div *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid" class="error">
-          <small *ngIf="loginForm.get('email')?.errors?.['required']">Email is required.</small>
-          <small *ngIf="loginForm.get('email')?.errors?.['email']">Invalid email format.</small>
+        <div *ngIf="loginForm.get('phone')?.touched && loginForm.get('phone')?.invalid" class="error">
+          <small *ngIf="loginForm.get('phone')?.errors?.['required']">Phone number is required.</small>
+          <small *ngIf="loginForm.get('phone')?.errors?.['pattern']">Invalid phone number format.</small>
         </div>
       </div>
 
