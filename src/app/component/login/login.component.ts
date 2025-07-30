@@ -4,7 +4,8 @@ import { ReactiveFormsModule, FormBuilder, Validators, FormGroup } from '@angula
 import { Router } from '@angular/router';
 import { AuthService } from '../../../app/services/auth.service';
 import { ToastService } from '../../../app/services/toast.service';
-
+import { FourDigitOtpModalComponent } from '../../shared/4digit-otp/four-digit-otp-modal/four-digit-otp-modal.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-login',
@@ -27,7 +28,8 @@ export class LoginComponent {
     private fb: FormBuilder,
     private authService: AuthService,
     private toast: ToastService,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog 
   ) {
     this.loginForm = this.fb.group({
       phone: ['', [Validators.required, Validators.pattern(/^[0-9]{10,15}$/)]],
@@ -35,27 +37,52 @@ export class LoginComponent {
     });
   }
 
-  handleSubmit(): void {
-    if (this.loginForm.invalid) return;
+handleSubmit(): void {
+  if (this.loginForm.invalid) return;
 
-    this.loginPending = true;
-    const { phone, password } = this.loginForm.value;
-    this.authService.login({ phone, password }).subscribe({
-      next: (data) => {
-        this.toast.success('Welcome back! You have been successfully logged in.');
+  this.loginPending = true;
+  const { phone, password } = this.loginForm.value;
 
-        if (data.user?.isArtisan) {
+  this.authService.login({ phone, password }).subscribe({
+    next: () => {
+
+      const dialogRef = this.dialog.open(FourDigitOtpModalComponent, {
+        data: { phone, type: 'login' },
+        disableClose: true
+      });
+
+      dialogRef.componentInstance.verified.subscribe(() => {
+        const user = this.authService.getUser();
+        this.toast.success('Login successful');
+
+        if (user?.isArtisan) {
           this.router.navigate(['/artisan-dashboard']);
         } else {
           this.router.navigate(['/user-dashboard']);
         }
-      },
+      });
+
+      dialogRef.componentInstance.showToast.subscribe((msg: string) => {
+        this.toast.error(msg);
+      });
+    },
       error: (err) => {
-        this.toast.error('Login failed or Invalid credentials');
+        const msg = err.error?.message;
+        if (msg === 'User is not verified') {
+          this.toast.warning('Account not verified. Please register again or contact support.');
+        } else {
+          this.toast.error(msg || 'Invalid phone number or password');
+        }
       },
-      complete: () => {
-        this.loginPending = false;
-      },
-    });
+    complete: () => {
+      this.loginPending = false;
+    },
+  });
+}
+
+  onToast(message: string): void {
+    this.toast.show(message); 
   }
+
+
 }

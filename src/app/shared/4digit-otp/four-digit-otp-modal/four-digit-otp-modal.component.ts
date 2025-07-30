@@ -1,40 +1,31 @@
-import {
-  Component,
-  Output,
-  EventEmitter,
-  OnDestroy
-} from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { MatDialogRef } from '@angular/material/dialog';
-import { FormsModule } from '@angular/forms';
-import { Subscription, interval } from 'rxjs';
-import { NgOtpInputModule } from 'ng-otp-input';
-import { environment } from '../../../../environment.prod';
-import { AuthService } from '../../services/auth.service';
+import { Component, EventEmitter, OnDestroy, Output } from '@angular/core';
 import { Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { interval, Subscription } from 'rxjs';
+import { environment } from '../../../../../environment.prod';
+import { AuthService } from '../../../services/auth.service';
+import { OtpModalComponent } from '../../otp-modal/otp-modal.component';
 
 @Component({
-  selector: 'app-otp-modal',
-  standalone: true,
-  imports: [CommonModule, FormsModule, NgOtpInputModule],
-  templateUrl: './otp-modal.component.html'
+  selector: 'app-four-digit-otp-modal',
+  imports: [],
+  templateUrl: './four-digit-otp-modal.component.html',
+  styleUrl: './four-digit-otp-modal.component.scss'
 })
-export class OtpModalComponent implements OnDestroy {
+export class FourDigitOtpModalComponent implements OnDestroy {
 
 
   @Output() verified = new EventEmitter<void>();
   @Output() showToast = new EventEmitter<string>();
 
   otpCode = '';
-  countdown = 60;
+  countdown = 300;
   canResend = false;
   timerSub!: Subscription;
   private baseUrl = environment.baseUrl;
 
   config = {
-    length: 6,
+    length: 4,
     inputClass: 'otp-input',
     allowNumbersOnly: true,
     isPasswordInput: false,
@@ -51,7 +42,7 @@ export class OtpModalComponent implements OnDestroy {
   }
 
   private startTimer(): void {
-    this.countdown = 240;
+    this.countdown = 300;
     this.canResend = false;
     this.timerSub?.unsubscribe();
     this.timerSub = interval(1000).subscribe(() => {
@@ -67,34 +58,34 @@ export class OtpModalComponent implements OnDestroy {
     this.otpCode = otp;
   }
 
-    handleSubmit(): void {
-    if (this.otpCode.length !== 6) {
-      this.showToast.emit('Please enter the full 6-digit OTP');
+  handleSubmit(): void {
+    if (this.otpCode.length !== 4) {
+      this.showToast.emit('Please enter the 4-digit OTP');
       return;
     }
 
-    this.authService.verifyOtp({
+    this.authService.verifyLoginOtp({
       phone: this.data.phone,
       otp: this.otpCode,
     }).subscribe({
       next: () => {
-        this.verified.emit();     
-        this.dialogRef.close();   
+        this.verified.emit();            
+        this.dialogRef.close(true);      
       },
       error: () => {
-        this.showToast.emit('Invalid OTP');
+        this.showToast.emit('Invalid or expired OTP'); 
       }
     });
   }
 
-  handleResend(): void {
-    if (!this.canResend) return;
-      this.authService.resendOtp({ phone: this.data.phone }).subscribe(() => {
-      this.showToast.emit('OTP resent successfully');
-      this.otpCode = '';
-      this.startTimer();
-    });
-  }
+  // handleResend(): void {
+  //   if (!this.canResend) return;
+  //     this.authService.resendOtp({ phone: this.data.phone }).subscribe(() => {
+  //     this.showToast.emit('OTP resent successfully');
+  //     this.otpCode = '';
+  //     this.startTimer();
+  //   });
+  // }
 
   ngOnDestroy(): void {
     this.timerSub?.unsubscribe();
@@ -106,4 +97,5 @@ export class OtpModalComponent implements OnDestroy {
   get type(): string {
     return this.data.type;
   }
+
 }

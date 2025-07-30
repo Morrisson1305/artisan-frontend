@@ -33,18 +33,23 @@ export class AuthService {
   this.isLoading.set(false);
   }
 
-  login(credentials: LoginPayload): Observable<{ user: User; accessToken: string; refreshToken: string }> {
-    return this.http.post<{ user: User; accessToken: string; refreshToken: string }>(
-      `${this.baseUrl}/auth/login`,
-      credentials
-    ).pipe(
-      tap(response => {
-        this.authStorage.setUser(response.user);
-        this.authStorage.setTokens(response.accessToken, response.refreshToken);
-        this.user.set(response.user);
-      })
-    );
-  }
+  login(credentials: { phone: string; password: string }): Observable<any> {
+  return this.http.post(`${this.baseUrl}/auth/login`, credentials);
+}
+
+  verifyLoginOtp(payload: { phone: string; otp: string }): Observable<{ user: User; accessToken: string; refreshToken: string }> {
+  return this.http.post<{ user: User; accessToken: string; refreshToken: string }>(
+    `${this.baseUrl}/auth/login/verify`,
+    payload
+  ).pipe(
+    tap(res => {
+      this.authStorage.setUser(res.user);
+      this.authStorage.setTokens(res.accessToken, res.refreshToken);
+      this.user.set(res.user);  
+    })
+  );
+}
+
 
   register(data: RegisterPayload): Observable<{ message: string }> {
     return this.http.post<{ message: string }>(`${this.baseUrl}/auth/register`, data);

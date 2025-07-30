@@ -20,4 +20,9 @@ export class ToastService {
   success(message: string) {
     this.show(`✅ ${message}`, 'Dismiss', 3000);
   }
+
+  warning(message: string) {
+  this.show(`⚠️ ${message}`, 'Dismiss', 4000);
+}
+
 }
