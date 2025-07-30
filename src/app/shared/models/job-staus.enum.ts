@@ -4,4 +4,5 @@ export enum JobStatus {
   ASSIGNED = 'assigned',
   COMPLETED = 'completed',
   CANCELLED = 'cancelled',
+
 }
