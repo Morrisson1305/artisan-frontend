@@ -1,220 +1,176 @@
-// Root container
-.min-h-screen {
+/* SCSS for Dashboard UI */
+
+.dashboard-layout {
+  display: flex;
   min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f9fa;
 }
 
-.bg-gray-50 {
-  background-color: #f9fafb;
+.sidebar {
+  width: 240px;
+  background-color: #1e293b;
+  color: #fff;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 2px 0 6px rgba(0, 0, 0, 0.1);
 }
 
-// Typography
-.text-3xl {
-  font-size: 1.875rem;
-  font-weight: 700;
-  color: #111827;
-}
-
-.text-lg {
-  font-size: 1.125rem;
-  font-weight: 600;
-  color: #111827;
-}
-
-.text-sm {
-  font-size: 0.875rem;
-}
-
-.font-medium {
-  font-weight: 500;
-}
-
-.font-bold {
-  font-weight: 700;
-}
-
-.text-gray-900 {
-  color: #111827;
-}
-
-.text-gray-600 {
-  color: #4b5563;
-}
-
-.text-gray-500 {
-  color: #6b7280;
-}
-
-// Layout + spacing
-.px-4 {
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-
-.py-8 {
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-}
-
-.mb-2 {
-  margin-bottom: 0.5rem;
-}
-
-.mb-4 {
-  margin-bottom: 1rem;
-}
-
-.mb-8 {
+.sidebar-title {
+  font-size: 1.75rem;
+  font-weight: bold;
   margin-bottom: 2rem;
+  color: #38bdf8;
 }
 
-.mt-4 {
-  margin-top: 1rem;
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
-.grid {
+.nav-link {
+  color: #cbd5e1;
+  text-decoration: none;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.375rem;
+  transition: background 0.3s;
+}
+
+.nav-link.active,
+.nav-link:hover {
+  background-color: #334155;
+  color: #fff;
+}
+
+.dashboard-container {
+  flex-grow: 1;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.post-job-btn {
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.post-job-btn:hover {
+  background-color: #2563eb;
+}
+
+.stats-grid {
   display: grid;
-}
-
-.gap-6 {
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 1.5rem;
 }
 
-.flex {
+.card {
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.card-content {
   display: flex;
-}
-
-.flex-col {
-  flex-direction: column;
-}
-
-.flex-1 {
-  flex: 1 1 0%;
-}
-
-.items-center {
+  justify-content: space-between;
   align-items: center;
 }
 
-.justify-between {
+.icon-circle {
+  width: 48px;
+  height: 48px;
+  background-color: #e5e7eb;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+}
+
+.card.blue {
+  border-left: 5px solid #3b82f6;
+}
+
+.card.green {
+  border-left: 5px solid #10b981;
+}
+
+.card.gray {
+  border-left: 5px solid #9ca3af;
+}
+
+.job-list-card {
+  padding: 2rem;
+}
+
+.job-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.job-item {
+  display: flex;
   justify-content: space-between;
+  align-items: flex-start;
+  gap: 1.5rem;
+  padding-bottom: 1rem;
+}
+
+.job-meta {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.job-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.view-btn {
+  color: #3b82f6;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-size: 0.875rem;
+}
+
+.view-btn:hover {
+  text-decoration: underline;
 }
 
 .text-center {
   text-align: center;
 }
 
-.max-w-7xl {
-  max-width: 80rem;
-}
-
-.mx-auto {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-// Cards and UI
-.bg-white {
-  background-color: #ffffff;
-}
-
-.shadow {
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.rounded {
-  border-radius: 0.5rem;
-}
-
-.border-b {
-  border-bottom: 1px solid #e5e7eb;
-}
-
-.divide-y > * + * {
-  border-top: 1px solid #e5e7eb;
-}
-
-// Buttons
-button,
-a {
-  cursor: pointer;
-  text-decoration: none;
-}
-
-.bg-blue-600 {
-  background-color: #2563eb;
-}
-
-.hover\:bg-blue-700:hover {
-  background-color: #1d4ed8;
-}
-
-.text-white {
-  color: #ffffff;
-}
-
-.px-4 {
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-
-.py-2 {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-}
-
-.rounded {
-  border-radius: 0.375rem;
-}
-
-.inline-block {
-  display: inline-block;
-}
-
-// Hover + transition
-.hover\:text-blue-600:hover {
-  color: #2563eb;
-}
-
-.hover\:underline:hover {
-  text-decoration: underline;
-}
-
-.hover\:bg-gray-50:hover {
-  background-color: #f9fafb;
-}
-
-.transition {
-  transition: background-color 0.2s ease-in-out;
-}
-
-// Job status badges
-.bg-blue-100 {
-  background-color: #dbeafe;
-}
-
-.text-blue-600 {
-  color: #2563eb;
-}
-
-.bg-yellow-100 {
-  background-color: #fef3c7;
-}
-
-.text-yellow-600 {
-  color: #d97706;
-}
-
-.bg-gray-100 {
-  background-color: #f3f4f6;
-}
-
-.text-gray-600 {
-  color: #4b5563;
-}
-
-// Modal overlay — assuming the modal is component-styled separately
-app-job-post-modal {
-  position: fixed;
-  inset: 0;
-  z-index: 50;
+.mt-4 {
+  margin-top: 1rem;
 }
