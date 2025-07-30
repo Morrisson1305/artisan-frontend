@@ -10,7 +10,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, MatDialogModule, FourDigitOtpModalComponent],
+  imports: [CommonModule, ReactiveFormsModule, MatDialogModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
   
