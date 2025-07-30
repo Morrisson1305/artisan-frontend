@@ -18,6 +18,10 @@ export const appRoutes: Routes = [
       import('../app/component/about/about.component').then((m) => m.AboutComponent),
   },
   {
+    path: 'user-dashboard',
+    loadComponent: () => import('../app/component/user-ddashboard/user-dashboard.component').then((m) => m.UserDashboardComponent),
+  },
+  {
     path: '',
     pathMatch: 'full',
     loadComponent: () =>
