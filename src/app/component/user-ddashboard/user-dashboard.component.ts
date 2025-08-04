@@ -18,8 +18,9 @@ import { NavbarComponent } from '../pages/dashboard/navbar/navbar.component';
   templateUrl: './user-dashboard.component.html',
 })
 export class UserDashboardComponent implements OnInit {
+ 
   user: any;
-  JobStatus = JobStatus; 
+  JobStatus = JobStatus;
 
   jobs$!: Observable<Job[]>;
   activeJobs$!: Observable<Job[]>;
@@ -27,6 +28,8 @@ export class UserDashboardComponent implements OnInit {
   totalSpent$!: Observable<number>;
 
   showJobPostModal = false;
+
+  activeTab: 'jobs' | 'bids' = 'jobs';
 
   constructor(
     private authService: AuthService,
@@ -66,4 +69,6 @@ export class UserDashboardComponent implements OnInit {
   closeJobModal(): void {
     this.showJobPostModal = false;
   }
+
+
 }
