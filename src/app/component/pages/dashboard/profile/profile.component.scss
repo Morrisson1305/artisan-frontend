@@ -1,0 +1,174 @@
+.dashboard {
+  background: #f9f9f9;
+  min-height: 100vh;
+  padding: 2rem;
+
+  .container {
+    max-width: 768px;
+    margin: 0 auto;
+  }
+
+  .profile-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    overflow: hidden;
+    padding: 2rem;
+
+    .profile-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+
+      .profile-info {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        .avatar {
+          width: 64px;
+          height: 64px;
+          background: #eee;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          .avatar-fallback {
+            font-weight: bold;
+            font-size: 1.25rem;
+          }
+        }
+
+        .profile-name {
+          margin: 0;
+        }
+
+        .profile-meta {
+          display: flex;
+          gap: 1rem;
+          font-size: 0.875rem;
+          color: #666;
+
+          .badge {
+            background: #e0f4e8;
+            color: #2d8659;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+          }
+        }
+      }
+
+      .btn.outline {
+        border: 1px solid #ccc;
+        background: none;
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+
+        .icon.edit {
+          margin-right: 0.5rem;
+        }
+      }
+    }
+
+    .profile-content {
+      .stats {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        margin-bottom: 2rem;
+
+        .stat-box {
+          background: #fafafa;
+          border: 1px solid #eee;
+          border-radius: 8px;
+          padding: 1rem;
+          text-align: center;
+
+          .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+
+            .icon.star {
+              color: #facc15;
+            }
+          }
+
+          .stat-label {
+            font-size: 0.875rem;
+            color: #666;
+          }
+        }
+      }
+
+      .section {
+        margin-bottom: 1.5rem;
+
+        label {
+          display: block;
+          font-weight: 500;
+          margin-bottom: 0.5rem;
+        }
+
+        .input-icon {
+          display: flex;
+          align-items: center;
+          background: #f1f1f1;
+          border-radius: 6px;
+          padding: 0.5rem;
+
+          i {
+            margin-right: 0.5rem;
+            color: #999;
+          }
+
+          input {
+            border: none;
+            background: transparent;
+            flex: 1;
+            font-size: 1rem;
+
+            &:focus {
+              outline: none;
+            }
+          }
+        }
+
+        textarea {
+          width: 100%;
+          padding: 0.5rem;
+          border-radius: 6px;
+          border: 1px solid #ddd;
+          resize: vertical;
+        }
+      }
+
+      .actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 1rem;
+
+        .btn {
+          padding: 0.5rem 1.25rem;
+          border-radius: 6px;
+          cursor: pointer;
+
+          &.outline {
+            background: transparent;
+            border: 1px solid #ccc;
+          }
+
+          &.primary {
+            background: #2d8659;
+            color: white;
+            border: none;
+          }
+        }
+      }
+    }
+  }
+}

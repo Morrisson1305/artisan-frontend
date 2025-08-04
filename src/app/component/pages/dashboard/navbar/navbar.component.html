@@ -1,0 +1,75 @@
+<nav class="navbar border-bottom bg-card-50 backdrop-blur">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center h-100 w-100">
+      <!-- Logo and Brand -->
+      <a href="/" class="d-flex align-items-center text-decoration-none">
+        <div class="logo d-flex align-items-center justify-content-center">
+          <i class="bi bi-briefcase text-light"></i>
+        </div>
+        <span class="brand-text">CraftConnect</span>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <div class="d-none d-md-flex align-items-center gap-3">
+        <a href="/dashboard" class="nav-link active">Dashboard</a>
+        <a href="/jobs" class="nav-link">Jobs</a>
+        <a href="/messages" class="nav-link">Messages</a>
+
+        <!-- Action Button -->
+        <a href="/jobs/new" class="btn btn-primary btn-sm ms-3">
+          <i class="bi bi-plus"></i> Post Job
+        </a>
+
+        <!-- Notification and Profile -->
+        <div class="d-flex align-items-center gap-2 ms-3">
+          <!-- Notifications -->
+          <button class="btn btn-icon btn-light position-relative">
+            <i class="bi bi-bell"></i>
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+              3
+            </span>
+          </button>
+
+          <!-- Profile Dropdown -->
+          <div class="dropdown">
+            <a href="#" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown">
+              <img src="/user-avatar.jpg" class="rounded-circle" width="32" height="32" alt="User" />
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" routerLink="/user-dashboard/profile" ><i class="bi bi-person"></i> Profile</a></li>
+              <li><a class="dropdown-item" href="#"><i class="bi bi-people"></i> Find Artisans</a></li>
+              <li><a class="dropdown-item" href="#"><i class="bi bi-gear"></i> Settings</a></li>
+              <li><hr class="dropdown-divider" /></li>
+              <li><a class="dropdown-item" href="#"><i class="bi bi-box-arrow-right"></i> Sign out</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Nav Toggle -->
+      <div class="d-md-none">
+        <button class="btn btn-icon" data-bs-toggle="offcanvas" data-bs-target="#mobileNav">
+          <i class="bi bi-list"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Offcanvas Menu -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="mobileNav">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title">Menu</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <div class="offcanvas-body d-flex flex-column gap-3">
+    <a routerLink="/user-dashboard"  class="nav-link">Dashboard</a>
+    <a href="#" class="nav-link">Jobs</a>
+    <a href="#" class="nav-link">Messages</a>
+    <a href="#" class="btn btn-primary">
+      <i class="bi bi-plus"></i> Post Job
+    </a>
+    <!-- <a href="/login" class="btn btn-outline-secondary">Sign In</a>
+    <a href="/register" class="btn btn-secondary">Get Started</a> -->
+  </div>
+</div>

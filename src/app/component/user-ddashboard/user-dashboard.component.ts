@@ -9,11 +9,12 @@ import { AuthService } from '../../services/auth.service';
 //import { JobPostModalComponent } from '../../../app/shared/jobs/job-post-modal.component';
 import { Job } from '../../../app/shared/models/job.model';
 import { JobStatus } from '../../shared/models/job-staus.enum';
+import { NavbarComponent } from '../pages/dashboard/navbar/navbar.component';
 
 @Component({
   selector: 'app-user-dashboard',
   standalone: true,
-  imports: [CommonModule, RouterModule], //JobPostModalComponent
+  imports: [CommonModule, RouterModule, NavbarComponent], //JobPostModalComponent
   templateUrl: './user-dashboard.component.html',
 })
 export class UserDashboardComponent implements OnInit {

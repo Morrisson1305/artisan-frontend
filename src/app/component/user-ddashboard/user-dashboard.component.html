@@ -1,101 +1,93 @@
-<div class="dashboard-layout">
-  <!-- Sidebar -->
-  <aside class="sidebar">
-    <h2 class="sidebar-title">CraftConnect</h2>
-    <nav class="sidebar-nav">
-      <a href="#" class="nav-link active">Dashboard</a>
-      <a href="#">My Jobs</a>
-      <a href="#">Messages</a>
-      <a href="#">Profile</a>
-    </nav>
-  </aside>
+<app-navbar></app-navbar>
 
-  <!-- Main Content -->
-  <div class="dashboard-container">
-    <!-- Header -->
+  <main class="dashboard-container">
     <div class="dashboard-header">
-      <div>
-        <h1 class="text-3xl mb-2">Welcome back, {{ user?.username }}!</h1>
-        <p class="text-gray-600">Manage your service requests and track ongoing projects</p>
+      <div class="welcome-text">
+        <h1>Welcome back, John Doe!</h1>
+        <p>Manage your projects and connect with skilled artisans</p>
       </div>
-      <button class="post-job-btn" (click)="openJobModal()">
-        ➕ Post New Job
-      </button>
+      <a href="/jobs/new" class="btn-primary">
+        <span class="icon">＋</span> Post New Job
+      </a>
     </div>
 
     <!-- Stats Cards -->
-    <div class="stats-grid">
-      <div class="card blue">
+    <div class="stats-cards">
+      <div class="card">
         <div class="card-content">
+          <div class="card-icon briefcase"></div>
           <div>
-            <p class="text-gray-500">Active Jobs</p>
-            <h2>{{ (activeJobs$ | async)?.length || 0 }}</h2>
+            <p>Total Jobs</p>
+            <h2>12</h2>
           </div>
-          <div class="icon-circle">💼</div>
         </div>
       </div>
-
-      <div class="card green">
+      <div class="card">
         <div class="card-content">
+          <div class="card-icon clock"></div>
           <div>
-            <p class="text-gray-500">Completed</p>
-            <h2>{{ (completedJobs$ | async)?.length || 0 }}</h2>
+            <p>Active Jobs</p>
+            <h2>5</h2>
           </div>
-          <div class="icon-circle">✅</div>
         </div>
       </div>
-
-      <div class="card gray">
+      <div class="card">
         <div class="card-content">
+          <div class="card-icon check-circle"></div>
           <div>
-            <p class="text-gray-500">Total Spent</p>
-            <h2>${{ (totalSpent$ | async)?.toFixed(2) || '0.00' }}</h2>
+            <p>Completed</p>
+            <h2>7</h2>
           </div>
-          <div class="icon-circle">💰</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-content">
+          <div class="card-icon dollar-sign"></div>
+          <div>
+            <p>Total Spent</p>
+            <h2>$4,200</h2>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Job List -->
-    <div class="card job-list-card">
-      <h3 class="text-lg mb-4">Recent Jobs</h3>
+    <!-- Tabs -->
+    <div class="tabs">
+      <div class="tab-buttons">
+        <button class="active" data-tab="jobs">My Jobs</button>
+        <button data-tab="bids">Recent Bids</button>
+      </div>
 
-      <ng-container *ngIf="jobs$ | async as jobs; else loading">
-        <div *ngIf="jobs.length === 0" class="text-center">
-          <p class="text-gray-600">No jobs posted yet</p>
-          <button class="post-job-btn mt-4" (click)="openJobModal()">➕ Post Your First Job</button>
+      <div class="tab-content active" id="jobs">
+        <div class="job-cards">
+          <div class="job-card">
+            <h3>Tile Installation</h3>
+            <p>Install floor tiles for kitchen and bathroom</p>
+            <button class="btn-secondary">View</button>
+          </div>
+          <div class="job-card">
+            <h3>Ceiling Repair</h3>
+            <p>Fix leaks and repaint ceiling in living room</p>
+            <button class="btn-secondary">View</button>
+          </div>
         </div>
+      </div>
 
-        <div *ngIf="jobs.length > 0" class="job-list divide-y">
-          <div *ngFor="let job of jobs" class="job-item">
-            <div class="flex-1">
-              <h4 class="text-lg font-medium">{{ job.title }}</h4>
-              <p class="text-gray-600">{{ job.description }}</p>
-              <div class="job-meta text-sm text-gray-500 mt-2">
-                <span>📍 {{ job.location }}</span>
-                <span>🕒 {{ job.createdAt | date: 'mediumDate' }}</span>
-              </div>
-            </div>
-            <div class="job-actions">
-              <span class="status-badge"
-                [ngClass]="{
-                  'bg-blue-100 text-blue-600': job.status === JobStatus.OPEN,
-                  'bg-yellow-100 text-yellow-600': job.status === JobStatus.ASSIGNED,
-                  'bg-gray-100 text-gray-600': job.status === JobStatus.COMPLETED,
-                  'bg-red-100 text-red-600': job.status === JobStatus.CANCELLED
-                }"
-              >
-                {{ job.status }}
-              </span>
-              <button class="view-btn hover:underline mt-2">View Details</button>
+      <div class="tab-content" id="bids">
+        <h3>Bids for: Kitchen Cabinet Painting</h3>
+        <div class="bid-cards">
+          <div class="bid-card">
+            <h4>Kwame Boateng</h4>
+            <p>₵500 - Estimated 3 days</p>
+            <div class="bid-actions">
+              <button class="btn-primary">Accept</button>
+              <button class="btn-danger">Reject</button>
+              <button class="btn-secondary">Message</button>
+              <button class="btn-secondary">View Profile</button>
             </div>
           </div>
         </div>
-      </ng-container>
-
-      <ng-template #loading>
-        <div class="text-gray-600">Loading jobs...</div>
-      </ng-template>
+      </div>
     </div>
-  </div>
-</div>
+  </main>
+

@@ -1,0 +1,108 @@
+@use 'sass:color';
+
+
+$primary: #4caf50; 
+$secondary: #ff6f00; 
+$light: #f8f9fa;
+$dark: #343a40;
+$radius: 12px;
+
+.navbar {
+  height: 70px;
+  background-color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  z-index: 999;
+  .container {
+    height: 100%;
+  }
+}
+
+.logo {
+  width: 36px;
+  height: 36px;
+  font-size: 1.25rem;
+  background: linear-gradient(135deg, $primary, $secondary);
+  border-radius: 50%;
+  color: white;
+  margin-right: 0.5rem;
+}
+
+.brand-text {
+  font-size: 1.25rem;
+  font-weight: 600;
+  background: linear-gradient(to right, $primary, $secondary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+// Navigation links
+.nav-link {
+  color: $dark;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+
+  &:hover,
+  &.active {
+    color: $primary;
+  }
+}
+
+// Buttons
+.btn-icon {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: $light;
+  color: $dark;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: color.adjust($light, $lightness: -5%);
+
+  }
+}
+
+// Dropdown
+.dropdown-menu {
+  border-radius: $radius;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  padding: 0.5rem;
+
+  .dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    i {
+      font-size: 1.1rem;
+    }
+
+    &:hover {
+      background-color: color.adjust($primary, $lightness: 45%);
+    }
+  }
+}
+
+
+.offcanvas {
+  background-color: white;
+  .offcanvas-title {
+    font-weight: 600;
+  }
+  .nav-link {
+    font-size: 1rem;
+    padding: 0.5rem 0;
+    color: $dark;
+
+    &:hover {
+      color: $primary;
+    }
+  }
+  .btn {
+    border-radius: $radius;
+  }
+}
