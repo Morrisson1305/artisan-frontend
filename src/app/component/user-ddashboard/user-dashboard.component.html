@@ -3,10 +3,10 @@
 <main class="dashboard-container">
   <div class="dashboard-header">
     <div class="welcome-text">
-      <h1>Welcome back, John Doe!</h1>
+      <h1>Welcome back, John Smith!</h1>
       <p>Manage your projects and connect with skilled artisans</p>
     </div>
-    <a href="/jobs/new" class="btn-primary">
+    <a routerLink="/jobs/new" class="btn-primary">
       <span class="icon">＋</span> Post New Job
     </a>
   </div>
@@ -27,7 +27,7 @@
         <div class="card-icon clock"></div>
         <div>
           <p>Active Jobs</p>
-          <h2>5</h2>
+          <h2>2</h2>
         </div>
       </div>
     </div>
@@ -36,7 +36,7 @@
         <div class="card-icon check-circle"></div>
         <div>
           <p>Completed</p>
-          <h2>7</h2>
+          <h2>8</h2>
         </div>
       </div>
     </div>
@@ -45,7 +45,7 @@
         <div class="card-icon dollar-sign"></div>
         <div>
           <p>Total Spent</p>
-          <h2>$4,200</h2>
+          <h2>$4,250</h2>
         </div>
       </div>
     </div>
@@ -54,48 +54,62 @@
   <!-- Tabs -->
   <div class="tabs">
     <div class="tab-buttons">
-      <button class="tab-btn active" data-tab="jobs" onclick="switchTab('jobs')">My Jobs</button>
-      <button class="tab-btn" data-tab="bids" onclick="switchTab('bids')">Recent Bids</button>
+      <button [class.active]="activeTab === 'jobs'" (click)="activeTab = 'jobs'">My Jobs</button>
+      <button [class.active]="activeTab === 'bids'" (click)="activeTab = 'bids'">Recent Bids</button>
     </div>
 
-    <div class="tab-content active" id="jobs">
+    <div class="tab-content" *ngIf="activeTab === 'jobs'">
       <div class="job-cards">
         <div class="job-card">
-          <h3>Tile Installation</h3>
-          <p>Install floor tiles for kitchen and bathroom</p>
-          <button class="btn-secondary">View</button>
+          <div class="job-header">
+            <h3>Kitchen Cabinet Painting</h3>
+            <span class="status open">Open</span>
+            <span class="urgency medium">Medium Priority</span>
+          </div>
+          <p>Need professional painting of kitchen cabinets. White color preferred. Kitchen is medium sized with approximately 20 cabinet doors.</p>
+          <ul class="meta">
+            <li>₵800 - ₵1200</li>
+            <li>Austin, TX</li>
+            <li>2 days ago</li>
+            <li>5 bids</li>
+          </ul>
+          <div class="action">
+            <button class="btn-secondary">Manage Job</button>
+          </div>
         </div>
+
         <div class="job-card">
-          <h3>Ceiling Repair</h3>
-          <p>Fix leaks and repaint ceiling in living room</p>
-          <button class="btn-secondary">View</button>
+          <div class="job-header">
+            <h3>Bathroom Plumbing Repair</h3>
+            <span class="status completed">Completed</span>
+            <span class="urgency high">High Priority</span>
+          </div>
+          <p>Leaky faucet and running toilet need repair. Located in master bathroom.</p>
+          <ul class="meta">
+            <li>₵200 - ₵400</li>
+            <li>Austin, TX</li>
+            <li>1 week ago</li>
+            <li>3 bids</li>
+          </ul>
+          <div class="action">
+            <button class="btn-secondary">Manage Job</button>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="tab-content" id="bids">
+    <div class="tab-content" *ngIf="activeTab === 'bids'">
       <h3>Bids for: Kitchen Cabinet Painting</h3>
-      <div class="bid-cards">
-        <div class="bid-card">
-          <h4>Kwame Boateng</h4>
-          <p>₵500 - Estimated 3 days</p>
-          <div class="bid-actions">
-            <button class="btn-primary">Accept</button>
-            <button class="btn-danger">Reject</button>
-            <button class="btn-secondary">Message</button>
-            <button class="btn-secondary">View Profile</button>
-          </div>
+      <div class="bid-card">
+        <h4>Kwame Boateng</h4>
+        <p>₵500 - Estimated 3 days</p>
+        <div class="bid-actions">
+          <button class="btn-primary">Accept</button>
+          <button class="btn-danger">Reject</button>
+          <button class="btn-secondary">Message</button>
+          <button class="btn-secondary">View Profile</button>
         </div>
       </div>
     </div>
   </div>
 </main>
-
-<script>
-  function switchTab(tabId) {
-    document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-    document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
-    document.getElementById(tabId).classList.add('active');
-    document.querySelector(`[data-tab="${tabId}"]`).classList.add('active');
-  }
-</script>
