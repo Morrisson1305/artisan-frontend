@@ -1,93 +1,101 @@
 <app-navbar></app-navbar>
 
-  <main class="dashboard-container">
-    <div class="dashboard-header">
-      <div class="welcome-text">
-        <h1>Welcome back, John Doe!</h1>
-        <p>Manage your projects and connect with skilled artisans</p>
-      </div>
-      <a href="/jobs/new" class="btn-primary">
-        <span class="icon">＋</span> Post New Job
-      </a>
+<main class="dashboard-container">
+  <div class="dashboard-header">
+    <div class="welcome-text">
+      <h1>Welcome back, John Doe!</h1>
+      <p>Manage your projects and connect with skilled artisans</p>
     </div>
+    <a href="/jobs/new" class="btn-primary">
+      <span class="icon">＋</span> Post New Job
+    </a>
+  </div>
 
-    <!-- Stats Cards -->
-    <div class="stats-cards">
-      <div class="card">
-        <div class="card-content">
-          <div class="card-icon briefcase"></div>
-          <div>
-            <p>Total Jobs</p>
-            <h2>12</h2>
-          </div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-content">
-          <div class="card-icon clock"></div>
-          <div>
-            <p>Active Jobs</p>
-            <h2>5</h2>
-          </div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-content">
-          <div class="card-icon check-circle"></div>
-          <div>
-            <p>Completed</p>
-            <h2>7</h2>
-          </div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-content">
-          <div class="card-icon dollar-sign"></div>
-          <div>
-            <p>Total Spent</p>
-            <h2>$4,200</h2>
-          </div>
+  <!-- Stats Cards -->
+  <div class="stats-cards">
+    <div class="card">
+      <div class="card-content">
+        <div class="card-icon briefcase"></div>
+        <div>
+          <p>Total Jobs</p>
+          <h2>12</h2>
         </div>
       </div>
     </div>
-
-    <!-- Tabs -->
-    <div class="tabs">
-      <div class="tab-buttons">
-        <button class="active" data-tab="jobs">My Jobs</button>
-        <button data-tab="bids">Recent Bids</button>
-      </div>
-
-      <div class="tab-content active" id="jobs">
-        <div class="job-cards">
-          <div class="job-card">
-            <h3>Tile Installation</h3>
-            <p>Install floor tiles for kitchen and bathroom</p>
-            <button class="btn-secondary">View</button>
-          </div>
-          <div class="job-card">
-            <h3>Ceiling Repair</h3>
-            <p>Fix leaks and repaint ceiling in living room</p>
-            <button class="btn-secondary">View</button>
-          </div>
+    <div class="card">
+      <div class="card-content">
+        <div class="card-icon clock"></div>
+        <div>
+          <p>Active Jobs</p>
+          <h2>5</h2>
         </div>
       </div>
+    </div>
+    <div class="card">
+      <div class="card-content">
+        <div class="card-icon check-circle"></div>
+        <div>
+          <p>Completed</p>
+          <h2>7</h2>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-content">
+        <div class="card-icon dollar-sign"></div>
+        <div>
+          <p>Total Spent</p>
+          <h2>$4,200</h2>
+        </div>
+      </div>
+    </div>
+  </div>
 
-      <div class="tab-content" id="bids">
-        <h3>Bids for: Kitchen Cabinet Painting</h3>
-        <div class="bid-cards">
-          <div class="bid-card">
-            <h4>Kwame Boateng</h4>
-            <p>₵500 - Estimated 3 days</p>
-            <div class="bid-actions">
-              <button class="btn-primary">Accept</button>
-              <button class="btn-danger">Reject</button>
-              <button class="btn-secondary">Message</button>
-              <button class="btn-secondary">View Profile</button>
-            </div>
+  <!-- Tabs -->
+  <div class="tabs">
+    <div class="tab-buttons">
+      <button class="tab-btn active" data-tab="jobs" onclick="switchTab('jobs')">My Jobs</button>
+      <button class="tab-btn" data-tab="bids" onclick="switchTab('bids')">Recent Bids</button>
+    </div>
+
+    <div class="tab-content active" id="jobs">
+      <div class="job-cards">
+        <div class="job-card">
+          <h3>Tile Installation</h3>
+          <p>Install floor tiles for kitchen and bathroom</p>
+          <button class="btn-secondary">View</button>
+        </div>
+        <div class="job-card">
+          <h3>Ceiling Repair</h3>
+          <p>Fix leaks and repaint ceiling in living room</p>
+          <button class="btn-secondary">View</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-content" id="bids">
+      <h3>Bids for: Kitchen Cabinet Painting</h3>
+      <div class="bid-cards">
+        <div class="bid-card">
+          <h4>Kwame Boateng</h4>
+          <p>₵500 - Estimated 3 days</p>
+          <div class="bid-actions">
+            <button class="btn-primary">Accept</button>
+            <button class="btn-danger">Reject</button>
+            <button class="btn-secondary">Message</button>
+            <button class="btn-secondary">View Profile</button>
           </div>
         </div>
       </div>
     </div>
-  </main>
+  </div>
+</main>
 
+<script>
+  function switchTab(tabId) {
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+    document.getElementById(tabId).classList.add('active');
+    document.querySelector(`[data-tab="${tabId}"]`).classList.add('active');
+  }
+</script>
