@@ -6,3 +6,9 @@ export enum JobStatus {
   CANCELLED = 'cancelled',
 
 }
+
+export enum JobPriority {
+  LOW = 'low',
+  MEDIUM = 'medium',
+  HIGH = 'high',
+}

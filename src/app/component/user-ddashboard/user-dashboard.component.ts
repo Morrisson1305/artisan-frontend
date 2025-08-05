@@ -1,21 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 
 import { JobService } from '../../services/job.service';
 import { AuthService } from '../../services/auth.service';
-//import { JobPostModalComponent } from '../../../app/shared/jobs/job-post-modal.component';
 import { Job } from '../../../app/shared/models/job.model';
 import { JobStatus } from '../../shared/models/job-staus.enum';
-//import { NavbarComponent } from '../pages/dashboard/navbar/navbar.component';
+import { TimeAgoPipe } from '../../shared/pipe/time-ago.pipe';
+import { MatDialog } from '@angular/material/dialog';
+import { PostJobModalComponent } from '../../shared/modals/post-job-modal/post-job-modal.component';
+import { ToastService } from '../../services/toast.service';
+
 
 @Component({
   selector: 'app-user-dashboard',
   standalone: true,
-  imports: [CommonModule, RouterModule], //JobPostModalComponent /NavbarComponent
+  imports: [CommonModule, RouterModule, TimeAgoPipe],
   templateUrl: './user-dashboard.component.html',
+  styleUrls: ['./user-dashboard.component.scss'],
 })
 export class UserDashboardComponent implements OnInit {
  
@@ -31,19 +35,27 @@ export class UserDashboardComponent implements OnInit {
 
   activeTab: 'jobs' | 'bids' = 'jobs';
 
+    selectedJobWithBids: {
+    title: string;
+    bids: {
+      artisanName: string;
+      amount: number;
+      estimatedTime: string;
+    }[];
+  } | null = null;
+
   constructor(
     private authService: AuthService,
-    private jobService: JobService
+    private jobService: JobService,
+    private dialog: MatDialog,
+    private toast: ToastService
   ) {}
 
   ngOnInit(): void {
     this.user = this.authService.getUser();
     const userId = this.user?.id;
-
     if (!userId) return;
-
     this.jobs$ = this.jobService.getUserJobs(userId);
-
     this.activeJobs$ = this.jobs$.pipe(
       map(jobs =>
         jobs.filter(
@@ -62,9 +74,55 @@ export class UserDashboardComponent implements OnInit {
     );
   }
 
-  openJobModal(): void {
-    this.showJobPostModal = true;
+    loadBidsForFirstJob(): void {
+    this.jobs$.pipe(
+      map(jobs => jobs[0]),
+      switchMap(firstJob => {
+        if (!firstJob) return of(null);
+        return this.jobService.getBidsForJob(firstJob.id).pipe(
+          map(bids => ({
+            title: firstJob.title,
+            bids: bids.map(bid => ({
+              artisanName: bid.artisanName || 'Artisan',
+              amount: bid.amount,
+              estimatedTime: bid.estimatedTime || 'N/A',
+            })),
+          }))
+        );
+      })
+    ).subscribe(result => {
+      this.selectedJobWithBids = result;
+    });
   }
+
+  setActiveTab(tab: 'jobs' | 'bids') {
+    this.activeTab = tab;
+    if (tab === 'bids') {
+      this.loadBidsForFirstJob();
+    }
+  }
+
+    acceptBid(bid: any) {
+    console.log('Accept bid', bid);
+  }
+
+  rejectBid(bid: any) {
+    console.log('Reject bid', bid);
+  }
+
+  openJobModal(): void {
+  const dialogRef = this.dialog.open(PostJobModalComponent, {
+    width: '800px',
+    disableClose: true
+  });
+  dialogRef.afterClosed().subscribe(result => {
+    if (result) {
+      this.jobs$ = this.jobService.getUserJobs(this.user.id);
+    }
+  });
+}
+
+
 
   closeJobModal(): void {
     this.showJobPostModal = false;

@@ -1,0 +1,89 @@
+.job-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  padding: 1.5rem 0;
+
+  mat-form-field {
+    width: 100%;
+    background: #fafafa;
+    border-radius: 8px;
+
+    .mat-form-field-wrapper {
+      padding: 0 0.75rem;
+    }
+
+    .mat-form-field-flex {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 0 1px #ccc;
+      transition: box-shadow 0.2s ease-in-out;
+
+      &:focus-within {
+        box-shadow: 0 0 0 2px #4CAF50;
+      }
+    }
+
+    .mat-input-element,
+    .mat-select-trigger {
+      font-size: 1rem;
+      padding: 0.75rem 0;
+      color: #333;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .mat-form-field-label {
+      color: #555;
+    }
+
+    .mat-select {
+      background-color: transparent;
+    }
+  }
+
+  .budget-group {
+    display: flex;
+    gap: 1rem;
+
+    mat-form-field {
+      flex: 1;
+    }
+
+    @media (max-width: 600px) {
+      flex-direction: column;
+    }
+  }
+
+  mat-dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+
+    button {
+      padding: 0.6rem 1.5rem;
+      font-weight: 500;
+      border-radius: 6px;
+      text-transform: capitalize;
+    }
+
+    button[color='primary'] {
+      background-color: #4CAF50;
+      color: white;
+
+      &:hover {
+        background-color: #43a047;
+      }
+    }
+  }
+}
+
+// Dialog title style
+::ng-deep h2[mat-dialog-title] {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin: 0;
+  color: #333;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #e0e0e0;
+}
