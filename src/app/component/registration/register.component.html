@@ -20,7 +20,15 @@
       <!-- Phone -->
       <div class="form-group">
         <label for="phone">Phone Number</label>
-        <input id="phone" type="tel" formControlName="phone" placeholder="Enter your phone number" required />
+        <input id="phone" type="tel" formControlName="phone" placeholder="233xxxx" required />
+          <div class="error" *ngIf="registerForm.get('phone')?.touched && registerForm.get('phone')?.invalid">
+          <small *ngIf="registerForm.get('phone')?.errors?.['required']">
+            Phone number is required
+          </small>
+          <small *ngIf="registerForm.get('phone')?.errors?.['pattern']">
+          Must be in the format 233XXXXXXXXX
+          </small>
+        </div>
       </div>
 
       <!-- Password -->
@@ -40,8 +48,7 @@
 </div>
 
 
-      <!-- Submit Button -->
-      <button type="submit" [disabled]="isSubmitting">
+      <button type="submit" [disabled]="registerForm.invalid || isSubmitting">
         {{ isSubmitting ? 'Submitting...' : 'Register' }}
       </button>
     </form>
