@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterModule } from '@angular/router';
+import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { filter, map, switchMap } from 'rxjs/operators';
 
 import { JobService } from '../../services/job.service';
 import { AuthService } from '../../services/auth.service';
@@ -52,9 +52,11 @@ export class UserDashboardComponent implements OnInit {
     private toast: ToastService,
     private router: Router
   ) {
-     this.router.events.subscribe(() => {
-    this.isOnDashboardRootRoute = this.router.url === '/user-dashboard';
-  });
+     this.router.events
+    .pipe(filter(event => event instanceof NavigationEnd))
+    .subscribe((event: NavigationEnd) => {
+      this.isOnDashboardRootRoute = event.urlAfterRedirects === '/user-dashboard';
+    });
   }
 
   ngOnInit(): void {
