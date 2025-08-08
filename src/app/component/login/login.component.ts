@@ -70,6 +70,7 @@ handleSubmit(): void {
       });
     },
       error: (err) => {
+        this.loginPending = false;
         const msg = err.error?.message;
         if (msg === 'User is not verified') {
           this.toast.warning('Account not verified. Please register again or contact support.');
@@ -77,9 +78,9 @@ handleSubmit(): void {
           this.toast.error(msg || 'Invalid phone number or password');
         }
       },
-    complete: () => {
-      this.loginPending = false;
-    },
+    // complete: () => {
+    //   this.loginPending = false;
+    // },
   });
 }
 
