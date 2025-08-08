@@ -1,0 +1,1 @@
+import{Ra as t,hb as n,ib as s,yb as p}from"./chunk-4FBGXZMF.js";var a=class o{static \u0275fac=function(e){return new(e||o)};static \u0275cmp=t({type:o,selectors:[["app-jobs"]],decls:2,vars:0,template:function(e,m){e&1&&(n(0,"p"),p(1,"jobs works!"),s())},encapsulation:2})};export{a as JobsComponent};
