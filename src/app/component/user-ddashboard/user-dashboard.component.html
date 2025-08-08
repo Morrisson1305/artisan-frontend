@@ -63,14 +63,13 @@
     </div>
   </div>
 
-
+  <ng-container *ngIf="isOnDashboardRootRoute">
   <div class="tabs">
     <div class="tab-buttons">
         <button [class.active]="activeTab === 'jobs'" (click)="setActiveTab('jobs')">My Jobs</button>
         <button [class.active]="activeTab === 'bids'" (click)="setActiveTab('bids')">Recent Bids</button>
     </div>
 
-     <router-outlet></router-outlet>
 
     <div class="tab-content" *ngIf="activeTab === 'jobs'">
   <div class="job-cards">
@@ -125,5 +124,8 @@
       </ng-template>
     </div>
   </div>
+  </ng-container>
+  
+  <router-outlet></router-outlet>
 </main>
 </div>

@@ -58,7 +58,7 @@ handleSubmit(): void {
         const user = this.authService.getUser();
         this.toast.success('Login successful');
 
-        if (user?.isArtisan) {
+        if (user?.role === 'artisan') {
           this.router.navigate(['/artisan-dashboard']);
         } else {
           this.router.navigate(['/user-dashboard']);

@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { UserDashboardComponent } from './component/user-ddashboard/user-dashboard.component';
+import { AuthGuard } from './utils/auth.guard';
 
 
 export const appRoutes: Routes = [
@@ -29,12 +30,8 @@ export const appRoutes: Routes = [
     {
     path: 'user-dashboard',
     component: UserDashboardComponent,
+    canActivate: [AuthGuard],
     children: [
-      {
-        path: '',
-        loadComponent: () =>
-          import('../app/component/user-ddashboard/user-dashboard.component').then((m) => m.UserDashboardComponent),
-      },
       {
         path: 'profile',
         loadComponent: () =>

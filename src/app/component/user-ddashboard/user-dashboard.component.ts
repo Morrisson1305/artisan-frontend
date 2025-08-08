@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
@@ -25,6 +25,7 @@ export class UserDashboardComponent implements OnInit {
  
   user: any;
   JobStatus = JobStatus;
+  isOnDashboardRootRoute = false;
 
   jobs$!: Observable<Job[]>;
   activeJobs$!: Observable<Job[]>;
@@ -48,8 +49,13 @@ export class UserDashboardComponent implements OnInit {
     private authService: AuthService,
     private jobService: JobService,
     private dialog: MatDialog,
-    private toast: ToastService
-  ) {}
+    private toast: ToastService,
+    private router: Router
+  ) {
+     this.router.events.subscribe(() => {
+    this.isOnDashboardRootRoute = this.router.url === '/user-dashboard';
+  });
+  }
 
   ngOnInit(): void {
     this.user = this.authService.getUser();
