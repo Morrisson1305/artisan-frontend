@@ -70,6 +70,7 @@
         <button [class.active]="activeTab === 'bids'" (click)="setActiveTab('bids')">Recent Bids</button>
     </div>
 
+     <router-outlet></router-outlet>
 
     <div class="tab-content" *ngIf="activeTab === 'jobs'">
   <div class="job-cards">
