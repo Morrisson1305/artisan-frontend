@@ -1,0 +1,1 @@
+import{Ra as n,hb as o,ib as s,yb as i}from"./chunk-QQISNQ6W.js";var p=class t{static \u0275fac=function(e){return new(e||t)};static \u0275cmp=n({type:t,selectors:[["app-bids"]],decls:2,vars:0,template:function(e,m){e&1&&(o(0,"p"),i(1,"bids works!"),s())},encapsulation:2})};export{p as BidsComponent};
