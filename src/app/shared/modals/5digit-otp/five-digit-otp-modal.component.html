@@ -1,0 +1,33 @@
+<div class="otp-modal-backdrop">
+  <div class="otp-modal">
+    <button class="close-btn" (click)="dialogRef.close()">×</button>
+
+    <h2 class="title">Enter OTP</h2>
+    <p class="subtitle">
+      We've sent a 5-digit verification code to <span class="phone">{{ phone }}</span>.
+    </p>
+
+    <ng-otp-input
+      [config]="config"
+      (onInputChange)="onOtpChange($event)">
+    </ng-otp-input>
+
+    <div class="resend-section">
+      <span *ngIf="!canResend">
+        Resend OTP in <strong>{{ countdown }}</strong>s
+      </span>
+      <!-- <a *ngIf="canResend" (click)="handleResend()" class="resend-link">
+        Resend OTP
+      </a> -->
+    </div>
+
+    <button
+      type="button"
+      class="verify-btn"
+      [disabled]="otpCode.length < 5 || isSubmitting()"
+      (click)="handleSubmit()"
+    >
+      {{ isSubmitting() ? 'Verifying...' : 'Verify' }}
+    </button>
+  </div>
+</div>

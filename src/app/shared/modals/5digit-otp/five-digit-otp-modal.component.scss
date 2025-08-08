@@ -1,0 +1,135 @@
+.otp-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.otp-modal {
+  background-color: #ffffff;
+  padding: 2rem 1.75rem;
+  width: 100%;
+  max-width: 420px;
+  border-radius: 1rem;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  font-family: system-ui, sans-serif;
+  animation: fadeIn 0.3s ease;
+
+  .close-btn {
+    position: absolute;
+    top: 0.75rem;
+    right: 1rem;
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #4b5563;
+    transition: color 0.2s;
+
+    &:hover {
+      color: #1f2937;
+    }
+  }
+
+  .title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    text-align: center;
+    color: #111827;
+  }
+
+  .subtitle {
+    text-align: center;
+    color: #6b7280;
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+
+    .phone {
+      font-weight: 600;
+      color: #111827;
+    }
+  }
+
+  .otp-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .otp-input {
+      width: 2.8rem;
+      height: 2.8rem;
+      margin: 0 0.25rem;
+      font-size: 1.4rem;
+      font-weight: 600;
+      text-align: center;
+      border: 1.5px solid #d1d5db;
+      border-radius: 0.5rem;
+      background: #fff;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+
+      &:focus {
+        border-color: #2563eb;
+        box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.3);
+      }
+    }
+
+    .verify-btn {
+      background-color: #2563eb;
+      color: #ffffff;
+      font-weight: 600;
+      border: none;
+      border-radius: 0.5rem;
+      padding: 0.65rem 1.75rem;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.2s;
+
+      &:hover {
+        background-color: #1d4ed8;
+      }
+
+      &:disabled {
+        background-color: #93c5fd;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+
+  .resend-section {
+    font-size: 0.85rem;
+    color: #6b7280;
+    margin-bottom: 1.25rem;
+    text-align: center;
+
+    .resend-link {
+      color: #2563eb;
+      cursor: pointer;
+      text-decoration: underline;
+      font-weight: 500;
+      transition: color 0.2s;
+
+      &:hover {
+        color: #1d4ed8;
+      }
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

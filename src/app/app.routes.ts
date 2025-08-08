@@ -40,16 +40,21 @@ export const appRoutes: Routes = [
         loadComponent: () =>
           import('../app/component/pages/dashboard/profile/profile.component').then((m) => m.ProfileComponent),
       },
-      // {
-      //   path: 'bids',
-      //   loadComponent: () =>
-      //     import('../app/component/pages/dashboard/bids/bids.component').then((m) => m.BidsComponent),
-      // },
-      // {
-      //   path: 'jobs',
-      //   loadComponent: () =>
-      //     import('./pages/dashboard/jobs/jobs.component').then((m) => m.JobsComponent),
-      // },
+      {
+        path: 'bids',
+        loadComponent: () =>
+          import('../app/component/pages/bids/bids.component').then((m) => m.BidsComponent),
+      },
+      {
+        path: 'jobs',
+        loadComponent: () =>
+          import('../app/component/pages/jobs/jobs.component').then((m) => m.JobsComponent),
+      },
+      {
+        path: 'post-jobs',
+        loadComponent: () =>
+          import('../app/component/pages/post-job/post-job.component').then((m) => m.PostJobComponent),
+      },
     ],
   },
 

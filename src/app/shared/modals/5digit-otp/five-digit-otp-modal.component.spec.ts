@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PostJobModalComponent } from './post-job-modal.component';
+import { PostJobModalComponent } from './five-digit-otp-modal.component';
 
 describe('PostJobModalComponent', () => {
   let component: PostJobModalComponent;

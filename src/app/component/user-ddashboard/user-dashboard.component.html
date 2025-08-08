@@ -1,14 +1,28 @@
-<main class="dashboard-container">
+<div class="dashboard-layout">
+
+  <input type="checkbox" id="sidebar-toggle" class="sidebar-toggle" hidden/>
+  <label for="sidebar-toggle" class="toggle-button">&#9776;</label>
+
+    <aside class="sidebar">
+    <h2>Dashboard</h2>
+    <ul class="sidebar-links">
+      <li><a routerLink="/user-dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a></li>
+      <li><a routerLink="/jobs" routerLinkActive="active">My Jobs</a></li>
+       <li><a routerLink="/bids" routerLinkActive="active">Bids</a></li>
+      <li><a routerLink="/post-job" routerLinkActive="active">Post job</a></li>
+      <li><a routerLink="/profile" routerLinkActive="active">Profile</a></li>
+      <li><a routerLink="/logout">Logout</a></li>
+    </ul>
+  </aside>
+
+<main class="dashboard-content">
   <div class="dashboard-header">
     <div class="welcome-text">
       <h1>Welcome back, {{ user?.name || 'User' }}!</h1>
       <p>Manage your projects and connect with skilled artisans</p>
     </div>
-    <a (click)="openJobModal()" class="btn-primary">
-      <span class="icon">＋</span> Post New Job
-    </a>
-  </div>
 
+  </div>
 
   <div class="stats-cards">
     <div class="card">
@@ -49,14 +63,14 @@
     </div>
   </div>
 
-  <!-- Tabs -->
+
   <div class="tabs">
     <div class="tab-buttons">
         <button [class.active]="activeTab === 'jobs'" (click)="setActiveTab('jobs')">My Jobs</button>
         <button [class.active]="activeTab === 'bids'" (click)="setActiveTab('bids')">Recent Bids</button>
     </div>
 
-    <!-- Jobs Tab -->
+
     <div class="tab-content" *ngIf="activeTab === 'jobs'">
   <div class="job-cards">
     <ng-container *ngIf="jobs$ | async as jobs">
@@ -83,8 +97,7 @@
 
     <ng-template #noJobs>
       <div class="no-jobs-msg">
-        <p>No Job Available. Kindly post a job.</p>
-        <a routerLink="/jobs/new" class="btn-primary mt-2">Post a Job</a>
+        <a routerLink="/bids" class="btn-primary mt-2">Post a Job</a>
       </div>
     </ng-template>
   </div>
@@ -108,8 +121,8 @@
       </ng-container>
 
       <ng-template #noBids>
-        <p>No bids to display. Select a job to view its bids.</p>
       </ng-template>
     </div>
   </div>
 </main>
+</div>

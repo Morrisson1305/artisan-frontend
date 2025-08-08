@@ -10,7 +10,7 @@ import { Job } from '../../../app/shared/models/job.model';
 import { JobStatus } from '../../shared/models/job-staus.enum';
 import { TimeAgoPipe } from '../../shared/pipe/time-ago.pipe';
 import { MatDialog } from '@angular/material/dialog';
-import { PostJobModalComponent } from '../../shared/modals/post-job-modal/post-job-modal.component';
+import { FiveDigitOtpModalComponent } from '../../shared/modals/5digit-otp/five-digit-otp-modal.component';
 import { ToastService } from '../../services/toast.service';
 
 
@@ -111,7 +111,7 @@ export class UserDashboardComponent implements OnInit {
   }
 
   openJobModal(): void {
-  const dialogRef = this.dialog.open(PostJobModalComponent, {
+  const dialogRef = this.dialog.open(FiveDigitOtpModalComponent, {
     width: '800px',
     disableClose: true
   });

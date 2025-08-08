@@ -1,0 +1,106 @@
+.post-job-container {
+  max-width: 720px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+
+  h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: #333;
+  }
+
+  .job-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      label {
+        font-weight: 500;
+        color: #444;
+      }
+
+      input,
+      textarea,
+      select {
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        transition: border-color 0.2s ease-in-out;
+
+        &:focus {
+          border-color: #4caf50;
+          outline: none;
+        }
+      }
+
+      textarea {
+        min-height: 100px;
+        resize: vertical;
+      }
+    }
+
+    .budget-group {
+      display: flex;
+      gap: 1rem;
+
+      .form-group {
+        flex: 1;
+      }
+
+      @media (max-width: 600px) {
+        flex-direction: column;
+      }
+    }
+
+    .form-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 1rem;
+      margin-top: 1rem;
+
+      button {
+        padding: 0.6rem 1.5rem;
+        font-size: 1rem;
+        font-weight: 500;
+        border: none;
+        border-radius: 6px;
+        text-transform: capitalize;
+        cursor: pointer;
+      }
+
+      button[type='button'] {
+        background-color: #e0e0e0;
+        color: #333;
+
+        &:hover {
+          background-color: #d5d5d5;
+        }
+      }
+
+      button[type='submit'] {
+        background-color: #4caf50;
+        color: white;
+
+        &:hover {
+          background-color: #43a047;
+        }
+
+        &:disabled {
+          background-color: #a5d6a7;
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+}
