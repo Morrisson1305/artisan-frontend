@@ -48,7 +48,7 @@ export const appRoutes: Routes = [
           import('../app/component/pages/jobs/jobs.component').then((m) => m.JobsComponent),
       },
       {
-        path: 'post-jobs',
+        path: 'post-job',
         loadComponent: () =>
           import('../app/component/pages/post-job/post-job.component').then((m) => m.PostJobComponent),
       },
